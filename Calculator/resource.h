@@ -7,27 +7,26 @@
 #define IDS_ABOUTBOX                    101
 #define IDD_CALCULATOR_DIALOG           102
 #define IDR_MAINFRAME                   128
-#define IDC_BUTTON8                     1000
-#define IDC_BUTTON7                     1001
-#define IDC_BUTTON9                     1002
-#define IDC_BUTTON4                     1003
-#define IDC_BUTTON6                     1004
-#define IDC_BUTTON61                    1005
+#define IDC_BUTTON0                     1000
+#define IDC_BUTTON1                     1001
+#define IDC_BUTTON2                     1002
+#define IDC_BUTTON3                     1003
+#define IDC_BUTTON4                     1004
 #define IDC_BUTTON5                     1005
-#define IDC_BUTTON1                     1006
-#define IDC_BUTTON2                     1007
-#define IDC_BUTTON_C                    1008
-#define IDC_BUTTON0                     1009
-#define IDC_BUTTON_DIVIDE               1010
-#define IDC_BUTTON3                     1011
-#define IDC_BUTTON_LEFT_BRACKET         1012
-#define IDC_BUTTON_MULTIPLY             1013
-#define IDC_BUTTON_MINUS                1014
-#define IDC_BUTTON_PLUS                 1015
-#define IDC_EDIT_RESULT                 1016
+#define IDC_BUTTON6                     1006
+#define IDC_BUTTON7                     1007
+#define IDC_BUTTON8                     1008
+#define IDC_BUTTON9                     1009
+#define IDC_BUTTON_PLUS                 1010
+#define IDC_BUTTON_MINUS                1011
+#define IDC_BUTTON_MULTIPLY             1012
+#define IDC_BUTTON_DIVIDE               1013
+#define IDC_BUTTON_LEFT_BRACKET         1014
+#define IDC_BUTTON_RIGHT_BRACKET        1015
+#define IDC_BUTTON_C                    1016
 #define IDC_BUTTON_DOT                  1017
-#define IDC_BUTTON_RIGHT_BRACKET        1019
-#define IDC_BUTTON_EQUAL                1020
+#define IDC_BUTTON_EQUAL                1018
+#define IDC_EDIT_RESULT                 1019
 
 // Next default values for new objects
 // 

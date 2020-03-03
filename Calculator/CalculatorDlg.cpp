@@ -65,23 +65,15 @@ BEGIN_MESSAGE_MAP(CCalculatorDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON0, &CCalculatorDlg::OnBnClickedButton0)
-	ON_BN_CLICKED(IDC_BUTTON1, &CCalculatorDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON2, &CCalculatorDlg::OnBnClickedButton2)
-	ON_BN_CLICKED(IDC_BUTTON3, &CCalculatorDlg::OnBnClickedButton3)
-	ON_BN_CLICKED(IDC_BUTTON4, &CCalculatorDlg::OnBnClickedButton4)
-	ON_BN_CLICKED(IDC_BUTTON5, &CCalculatorDlg::OnBnClickedButton5)
-	ON_BN_CLICKED(IDC_BUTTON6, &CCalculatorDlg::OnBnClickedButton6)
-	ON_BN_CLICKED(IDC_BUTTON7, &CCalculatorDlg::OnBnClickedButton7)
-	ON_BN_CLICKED(IDC_BUTTON8, &CCalculatorDlg::OnBnClickedButton8)
-	ON_BN_CLICKED(IDC_BUTTON9, &CCalculatorDlg::OnBnClickedButton9)
 	ON_BN_CLICKED(IDC_BUTTON_PLUS, &CCalculatorDlg::OnBnClickedButtonPlus)
 	ON_BN_CLICKED(IDC_BUTTON_MINUS, &CCalculatorDlg::OnBnClickedButtonMinus)
 	ON_BN_CLICKED(IDC_BUTTON_MULTIPLY, &CCalculatorDlg::OnBnClickedButtonMultiply)
 	ON_BN_CLICKED(IDC_BUTTON_DIVIDE, &CCalculatorDlg::OnBnClickedButtonDivide)
 	ON_BN_CLICKED(IDC_BUTTON_EQUAL, &CCalculatorDlg::OnBnClickedButtonEqual)
 	ON_BN_CLICKED(IDC_BUTTON_C, &CCalculatorDlg::OnBnClickedButtonC)
-	//ON_BN_CLICKED(IDC_BUTTON_DOT, &CCalculatorDlg::OnBnClickedButtonDot)
+	ON_BN_CLICKED(IDC_BUTTON_DOT, &CCalculatorDlg::OnBnClickedButtonDot)
+	ON_BN_CLICKED(IDC_BUTTON_LEFT_BRACKET, &CCalculatorDlg::OnBnClickedButtonLeftBracket)
+	ON_BN_CLICKED(IDC_BUTTON_RIGHT_BRACKET, &CCalculatorDlg::OnBnClickedButtonRightBracket)
 END_MESSAGE_MAP()
 
 
@@ -170,204 +162,50 @@ HCURSOR CCalculatorDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CCalculatorDlg::OnBnClickedButton0()
+BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 {
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	if (IDC_BUTTON0 <= wParam && wParam <= IDC_BUTTON9)
 	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"0");
-		isNewNum = false;
+		CString str, num_str;
+		GetDlgItemText(IDC_EDIT_RESULT, str);
+		num_str.Format(_T("%d"), int(wParam - IDC_BUTTON0));
+		if (isNewNum)
+		{
+			SetDlgItemText(IDC_EDIT_RESULT, num_str);
+			isNewNum = false;
+		}
+		else if (str == "0")
+			SetDlgItemText(IDC_EDIT_RESULT, num_str);
+		else
+			SetDlgItemText(IDC_EDIT_RESULT, str + num_str);
 	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"0");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"0");
+	return CDialogEx::OnCommand(wParam, lParam);
 }
-
-
-void CCalculatorDlg::OnBnClickedButton1()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"1");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"1");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"1");
-}
-
-
-void CCalculatorDlg::OnBnClickedButton2()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"2");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"2");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"2");
-}
-
-
-void CCalculatorDlg::OnBnClickedButton3()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"3");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"3");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"3");
-}
-
-
-void CCalculatorDlg::OnBnClickedButton4()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"4");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"4");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"4");
-}
-
-
-void CCalculatorDlg::OnBnClickedButton5()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"5");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"5");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"5");
-}
-
-
-void CCalculatorDlg::OnBnClickedButton6()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"6");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"6");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"6");
-}
-
-
-void CCalculatorDlg::OnBnClickedButton7()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"7");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"7");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"7");
-}
-
-
-void CCalculatorDlg::OnBnClickedButton8()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"8");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"8");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"8");
-}
-
-
-void CCalculatorDlg::OnBnClickedButton9()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
-
-	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (isNewNum)
-	{
-		SetDlgItemText(IDC_EDIT_RESULT, L"9");
-		isNewNum = false;
-	}
-	else if (str == L"0")
-		SetDlgItemText(IDC_EDIT_RESULT, L"9");
-	else
-		SetDlgItemText(IDC_EDIT_RESULT, str + L"9");
-}
-
 
 void CCalculatorDlg::OnBnClickedButtonPlus()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CString str;
 	GetDlgItemText(IDC_EDIT_RESULT, str);
-	c_temp = GetDlgItemInt(IDC_EDIT_RESULT);
+	calc(flag);
+	str.Format(L"%.2f", c_temp);
+	str.TrimRight(L"0");
+	str.TrimRight(L".");
 	SetDlgItemText(IDC_EDIT_RESULT, str);
 	flag = 1;
 	isNewNum = true;
 }
-
 
 void CCalculatorDlg::OnBnClickedButtonMinus()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CString str;
 	GetDlgItemText(IDC_EDIT_RESULT, str);
-	c_temp = GetDlgItemInt(IDC_EDIT_RESULT);
+	calc(flag);
+	str.Format(L"%.2f", c_temp);
+	str.TrimRight(L"0");
+	str.TrimRight(L".");
 	SetDlgItemText(IDC_EDIT_RESULT, str);
 	flag = 2;
 	isNewNum = true;
@@ -379,48 +217,53 @@ void CCalculatorDlg::OnBnClickedButtonMultiply()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CString str;
 	GetDlgItemText(IDC_EDIT_RESULT, str);
-	c_temp = GetDlgItemInt(IDC_EDIT_RESULT);
+	calc(flag);
+	str.Format(L"%.2f", c_temp);
+	str.TrimRight(L"0");
+	str.TrimRight(L".");
 	SetDlgItemText(IDC_EDIT_RESULT, str);
 	flag = 3;
 	isNewNum = true;
 }
 
-
+ 
 void CCalculatorDlg::OnBnClickedButtonDivide()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CString str;
 	GetDlgItemText(IDC_EDIT_RESULT, str);
-	c_temp = GetDlgItemInt(IDC_EDIT_RESULT);
+	calc(flag);
+	str.Format(L"%.2f", c_temp);
+	str.TrimRight(L"0");
+	str.TrimRight(L".");
 	SetDlgItemText(IDC_EDIT_RESULT, str);
 	flag = 4;
 	isNewNum = true;
 }
 
-
-void CCalculatorDlg::OnBnClickedButtonEqual()
+void CCalculatorDlg::calc(int flag)
 {
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CString str;
-
 	double c_value;
 	GetDlgItemText(IDC_EDIT_RESULT, str);
 	c_value = _wtof(str);
-
 	switch (flag)
 	{
+	case 0:
+		c_temp = c_value;
+		break;
 	case 1:
-		c_temp = c_temp + c_value;
+		c_temp += c_value;
 		flag = 0;
 		break;
 
 	case 2:
-		c_temp = c_temp - c_value;
+		c_temp -= c_value;
 		flag = 0;
 		break;
 
 	case 3:
-		c_temp = c_temp * c_value;
+		c_temp *= c_value;
 		flag = 0;
 		break;
 
@@ -431,11 +274,18 @@ void CCalculatorDlg::OnBnClickedButtonEqual()
 			c_temp = 0;
 		else
 		{
-			c_temp = c_temp / c_value;
+			c_temp /= c_value;
 			flag = 0;
 		}
 		break;
 	}
+}
+
+void CCalculatorDlg::OnBnClickedButtonEqual()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString str;
+	calc(flag);
 
 	str.Format(L"%.2f", c_temp);
 	str.TrimRight(L"0");
@@ -453,10 +303,23 @@ void CCalculatorDlg::OnBnClickedButtonC()
 }
 
 
-//void CCalculatorDlg::OnBnClickedButtonDot()
-//{
-//	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-//	CString str;
-//	GetDlgItemText(IDC_EDIT_RESULT, str);
-//	SetDlgItemText(IDC_EDIT_RESULT, str + ".");
-//}
+void CCalculatorDlg::OnBnClickedButtonDot()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString str;
+	GetDlgItemText(IDC_EDIT_RESULT, str);
+	SetDlgItemText(IDC_EDIT_RESULT, str + ".");
+}
+
+
+void CCalculatorDlg::OnBnClickedButtonLeftBracket()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	bracketCount += 1;
+}
+
+
+void CCalculatorDlg::OnBnClickedButtonRightBracket()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
