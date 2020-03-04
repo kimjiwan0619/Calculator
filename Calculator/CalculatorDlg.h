@@ -32,20 +32,20 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedButtonPlus();
-	afx_msg void OnBnClickedButtonMinus();
-	afx_msg void OnBnClickedButtonMultiply();
-	afx_msg void OnBnClickedButtonDivide();
-	afx_msg void OnBnClickedButtonEqual();
 	afx_msg void OnBnClickedButtonC();
 	afx_msg void OnBnClickedButtonDot();
-	afx_msg void calc(int flag);
-	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
-	int flag = 0;
-	double c_temp = 0;
-	CString c_result;
-	bool isNewNum = true;
-	int bracketCount = 0;
 	afx_msg void OnBnClickedButtonLeftBracket();
 	afx_msg void OnBnClickedButtonRightBracket();
+	afx_msg void OnBnClickedButtonEqual();
+	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
+	BOOL PreTranslateMessage(MSG* pMsg);
+	CString lastStr();
+	bool calcOver = false;
+	bool isNewNum = true;
+	bool checkNum = false;
+	bool checkOp = false;
+	bool checkDot = true; //dot 쓸수 있는지
+	bool checkBracket();
+	int leftBracket = 0;
+	int rightBracket = 0;
 };
