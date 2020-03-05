@@ -37,18 +37,18 @@ public:
 	afx_msg void OnBnClickedButtonLeftBracket();
 	afx_msg void OnBnClickedButtonRightBracket();
 	afx_msg void OnBnClickedButtonEqual();
+	afx_msg void OnBnClickedButtonBackspace();
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
 	BOOL PreTranslateMessage(MSG* pMsg);
-	CString lastStr(); // 마지막 문자
-	int opToInt(CString); // operator에 값 할당 
-	bool overDotNum = false; // 소수점 전후 구분
-	bool calcOver = false; // 연산식이 끝났는지
-	bool checkNum = false; // 마지막 문자가 숫자인지
-	bool checkOp = false; // 마지막 문자가 operator인지
-	bool checkDot = false; // dot 쓸수 있는지
-	bool checkBracket(); // '('괄호개수가 ')'개수보다 많거나 같은지
-	bool isNewNum = true;
-	int cntLeftBracket = 0; //'('개수
-	int cntRightBracket = 0; //')'개수
-	afx_msg void OnBnClickedButtonBackspace();
+	CString m_strLastChar(); // 마지막 문자
+	bool m_bCheckBracket(); // '('괄호개수가 ')'개수보다 많거나 같은지
+	bool m_bIsOverDot = false; // 소수점 전후 구분
+	bool m_bCalcIsOver = false; // 연산식이 끝났는지
+	bool m_bLastIsNum = false; // 마지막 문자가 숫자인지
+	bool m_bLastIsOp = false; // 마지막 문자가 operator인지
+	bool m_bDotEnable = false; // dot 쓸수 있는지
+	bool m_bIsNewNum = true; // 처음 or 연산자 or 괄호 이후 숫자인지
+	int m_iOpToInt(CString); // operator에 값 할당 
+	int m_nCntLeftBracket = 0; //'('개수
+	int m_nCntRightBracket = 0; //')'개수
 };
