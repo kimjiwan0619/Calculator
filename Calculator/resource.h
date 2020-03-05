@@ -28,6 +28,8 @@
 #define IDC_BUTTON_EQUAL                1018
 #define IDC_EDIT_RESULT                 1019
 #define IDC_BUTTON_LEFT_BRACKET2        1020
+#define IDC_BUTTON_LEFT_BRACKET3        1021
+#define IDC_BUTTON_BACKSPACE            1021
 
 // Next default values for new objects
 // 

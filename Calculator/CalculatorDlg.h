@@ -40,12 +40,15 @@ public:
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
 	BOOL PreTranslateMessage(MSG* pMsg);
 	CString lastStr(); // 마지막 문자
+	int opToInt(CString); // operator에 값 할당 
 	bool overDotNum = false; // 소수점 전후 구분
 	bool calcOver = false; // 연산식이 끝났는지
 	bool checkNum = false; // 마지막 문자가 숫자인지
 	bool checkOp = false; // 마지막 문자가 operator인지
 	bool checkDot = false; // dot 쓸수 있는지
 	bool checkBracket(); // '('괄호개수가 ')'개수보다 많거나 같은지
+	bool isNewNum = true;
 	int cntLeftBracket = 0; //'('개수
 	int cntRightBracket = 0; //')'개수
+	afx_msg void OnBnClickedButtonBackspace();
 };
