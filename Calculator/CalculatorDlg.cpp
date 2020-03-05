@@ -171,25 +171,36 @@ BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 		CString str, num_str;
 		GetDlgItemText(IDC_EDIT_RESULT, str);
 		num_str.Format(_T("%d"), int(wParam - IDC_BUTTON0));
-		if (str == "" || lastStr() == '0')
+		if (str == "" || str == '0')
 			SetDlgItemText(IDC_EDIT_RESULT, num_str);
 		else
 			SetDlgItemText(IDC_EDIT_RESULT, str + num_str);
+		if (!overDotNum)
+			checkDot = true;
 		checkOp = false;
 		checkNum = true;
 	}
 	else if (IDC_BUTTON_PLUS <= wParam && wParam <= IDC_BUTTON_DIVIDE)
 	{
+		CString str, op_str;
+		GetDlgItemText(IDC_EDIT_RESULT, str);
+		GetDlgItemText(wParam, op_str);
 		if (!checkOp && !calcOver && (checkNum || lastStr() == ')'))
 		{
-			CString str, num_str, op_str;
-			GetDlgItemText(IDC_EDIT_RESULT, str);
-			GetDlgItemText(wParam, op_str);
 			SetDlgItemText(IDC_EDIT_RESULT, str + op_str);
-			isNewNum = true;
-			checkDot = true;
+			checkDot = false;
 			checkNum = false;
 			checkOp = true;
+			overDotNum = false;
+		}
+		else if (checkOp)
+		{
+			str.Delete(str.GetLength() -1 , 1);
+			SetDlgItemText(IDC_EDIT_RESULT, str + op_str);
+			checkDot = false;
+			checkNum = false;
+			checkOp = true;
+			overDotNum = false;
 		}
 	}
 	return CDialogEx::OnCommand(wParam, lParam);
@@ -208,8 +219,7 @@ void CCalculatorDlg::OnBnClickedButtonLeftBracket()
 			SetDlgItemText(IDC_EDIT_RESULT, L"(");
 		else
 			SetDlgItemText(IDC_EDIT_RESULT, str + "(");
-		isNewNum = false;
-		leftBracket++;
+		cntLeftBracket++;
 	}
 }
 
@@ -218,13 +228,13 @@ void CCalculatorDlg::OnBnClickedButtonC()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CString str;
 	SetDlgItemText(IDC_EDIT_RESULT, L"");
-	isNewNum = true;
+	overDotNum = false;
 	checkNum = false;
 	checkOp = false;
-	checkDot = true;
+	checkDot = false;
 	calcOver = false;
-	leftBracket = 0;
-	rightBracket = 0;
+	cntLeftBracket = 0;
+	cntRightBracket = 0;
 }
 
 
@@ -238,6 +248,7 @@ void CCalculatorDlg::OnBnClickedButtonDot()
 		SetDlgItemText(IDC_EDIT_RESULT, str + ".");
 		checkDot = false;
 		checkNum = false;
+		overDotNum = true;
 	}
 }
 CString CCalculatorDlg::lastStr()
@@ -252,19 +263,19 @@ void CCalculatorDlg::OnBnClickedButtonRightBracket()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CString str;
 	GetDlgItemText(IDC_EDIT_RESULT, str);
-	rightBracket++;
+	cntRightBracket++;
 	if (checkBracket() && (checkNum || lastStr() == ")"))
 	{
 		SetDlgItemText(IDC_EDIT_RESULT, str + ")");
 		checkNum = false;
 	}
 	else
-		rightBracket--;
+		cntRightBracket--;
 }
 
 bool CCalculatorDlg::checkBracket()
 {
-	if (leftBracket >= rightBracket)
+	if (cntLeftBracket >= cntRightBracket)
 		return true;
 	else
 		return false;
@@ -277,15 +288,17 @@ void CCalculatorDlg::OnBnClickedButtonEqual()
 	GetDlgItemText(IDC_EDIT_RESULT, str);
 	std::stack<CString> stack;
 	std::queue<CString> queue;
-	if (leftBracket != rightBracket)
+	if (cntLeftBracket != cntRightBracket)
 	{
 		AfxMessageBox(L"괄호 개수가 안맞습니다.");
-		OnBnClickedButtonC();
+		//OnBnClickedButtonC();
+		return;
 	}
-	else if (!checkNum && lastStr() != ')')
+	else if (!checkNum && lastStr() != ')' && !calcOver)
 	{
-		AfxMessageBox(L"잘못된 연산식 입니다.");
-		OnBnClickedButtonC();
+		AfxMessageBox(L"end error");
+		//OnBnClickedButtonC();
+		return;
 	}
 	else
 	{
@@ -391,7 +404,7 @@ void CCalculatorDlg::OnBnClickedButtonEqual()
 	}
 }
 
-
+//키보드 입력
 BOOL CCalculatorDlg::PreTranslateMessage(MSG* pMsg)
 {
 	if (pMsg->message == WM_CHAR)
