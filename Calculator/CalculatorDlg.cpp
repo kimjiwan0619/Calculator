@@ -82,12 +82,26 @@ BOOL CCalculatorDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	// 폰트 설정
-	static CFont font;
+	/*static CFont font;
 	LOGFONT LogFont;
 	GetDlgItem(IDC_EDIT_RESULT)->GetFont()->GetLogFont(&LogFont);
 	LogFont.lfHeight = 20;
+
 	font.CreateFontIndirect(&LogFont);
-	GetDlgItem(IDC_EDIT_RESULT)->SetFont(&font);
+	GetDlgItem(IDC_EDIT_RESULT)->SetFont(&font);*/
+	CRect r;
+
+	((CEdit*)GetDlgItem(IDC_EDIT_RESULT))->GetRect(r);
+
+	// 상/하는 6만큼씩 여백을 부여합니다.
+	r.top += 50;
+	r.bottom -= 50;
+
+	// 변경된 정보를 해당 에디트 컨트롤에 적용합니다.
+	((CEdit*)GetDlgItem(IDC_EDIT_RESULT))->SetRect(r);
+	
+
+
 	// 시스템 메뉴에 "정보..." 메뉴 항목을 추가합니다.
 
 	// IDM_ABOUTBOX는 시스템 명령 범위에 있어야 합니다.
@@ -215,13 +229,22 @@ BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 			m_bLastIsOp = true;
 			m_bIsOverDot = false;
 		}
-		else if (!m_bLastIsOp && ( m_bLastIsNum || m_strLastChar() == ')'))
+		else if (!m_bLastIsOp && (m_bLastIsNum || m_strLastChar() == ')'))
 		{
 			SetDlgItemText(IDC_EDIT_RESULT, str + op_str);
 			m_bDotEnable = false;
 			m_bLastIsNum = false;
 			m_bLastIsOp = true;
 			m_bIsOverDot = false;
+		}
+		else if (str == '-')
+		{
+			if (wParam == IDC_BUTTON_PLUS)
+			{
+				OnBnClickedButtonC();
+			}
+			else 
+				return CDialogEx::OnCommand(wParam, lParam);
 		}
 		else if (m_bLastIsOp)
 		{
@@ -245,7 +268,7 @@ void CCalculatorDlg::OnBnClickedButtonLeftBracket()
 		OnBnClickedButtonC();
 	CString str;
 	GetDlgItemText(IDC_EDIT_RESULT, str);
-	if (m_bCheckBracket() && ! m_bLastIsNum && m_strLastChar() != ')')
+	if (m_bCheckBracket() && ! m_bLastIsNum && !m_bIsOverDot && m_strLastChar() != ')')
 	{
 		if (m_strLastChar() == '0')
 			SetDlgItemText(IDC_EDIT_RESULT, L"(");
