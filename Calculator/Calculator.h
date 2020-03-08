@@ -20,6 +20,7 @@ class CCalculatorApp : public CWinApp
 public:
 	CCalculatorApp();
 
+	ULONG_PTR m_gdiplusToken;
 // 재정의입니다.
 public:
 	virtual BOOL InitInstance();

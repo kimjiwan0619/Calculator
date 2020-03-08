@@ -4,6 +4,7 @@
 
 #pragma once
 #include "resource.h"
+#include "SkinButton.h"
 
 // CCalculatorDlg 대화 상자
 class CCalculatorDlg : public CDialogEx
@@ -51,4 +52,30 @@ public:
 	int m_iOpToInt(CString); // operator에 값 할당 
 	int m_nCntLeftBracket = 0; //'('개수
 	int m_nCntRightBracket = 0; //')'개수
+	CSkinButton m_btn0;
+	CSkinButton m_btn1;
+	CSkinButton m_btn2;
+	CSkinButton m_btn3;
+	CSkinButton m_btn4;
+	CSkinButton m_btn5;
+	CSkinButton m_btn6;
+	CSkinButton m_btn7;
+	CSkinButton m_btn8;
+	CSkinButton m_btn9;
+	CSkinButton m_btn10;
+	CSkinButton m_btn11;
+	CSkinButton m_btn12;
+	CSkinButton m_btn13;
+	CSkinButton m_btn14;
+	CSkinButton m_btn15;
+	CSkinButton m_btn16;
+	CSkinButton m_btn17;
+	CSkinButton m_btn18;
+	CSkinButton m_btn19;
+	CSkinButton m_btn20;
+	CSkinButton m_btn21;
+	CSkinButton m_btn22;
+	CSkinButton m_btn23;
+	CEdit m_edit;
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

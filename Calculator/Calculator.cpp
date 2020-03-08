@@ -52,6 +52,9 @@ BOOL CCalculatorApp::InitInstance()
 
 	CWinApp::InitInstance();
 
+	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+	Gdiplus::GdiplusStartup(&m_gdiplusToken, &gdiplusStartupInput, NULL);
+
 
 	AfxEnableControlContainer();
 

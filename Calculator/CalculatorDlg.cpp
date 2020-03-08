@@ -51,7 +51,6 @@ END_MESSAGE_MAP()
 // CCalculatorDlg 대화 상자
 
 
-
 CCalculatorDlg::CCalculatorDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_CALCULATOR_DIALOG, pParent)
 {
@@ -61,7 +60,70 @@ CCalculatorDlg::CCalculatorDlg(CWnd* pParent /*=nullptr*/)
 void CCalculatorDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	m_btn0.SetStrText(L"0");
+	m_btn0.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON0, m_btn0);
+	m_btn1.SetStrText(L"1");
+	m_btn1.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON1, m_btn1);
+	m_btn2.SetStrText(L"2");
+	m_btn2.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON2, m_btn2);
+	m_btn3.SetStrText(L"3");
+	m_btn3.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON3, m_btn3);
+	m_btn4.SetStrText(L"4");
+	m_btn4.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON4, m_btn4);
+	m_btn5.SetStrText(L"5");
+	m_btn5.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON5, m_btn5);
+	m_btn6.SetStrText(L"6");
+	m_btn6.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON6, m_btn6);
+	m_btn7.SetStrText(L"7");
+	m_btn7.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON7, m_btn7);
+	m_btn8.SetStrText(L"8");
+	m_btn8.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON8, m_btn8);
+	m_btn9.SetStrText(L"9");
+	m_btn9.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON9, m_btn9);
+	m_btn10.SetStrText(L"C");
+	DDX_Control(pDX, IDC_BUTTON_C, m_btn10);
+	m_btn11.SetStrText(L"+");
+	DDX_Control(pDX, IDC_BUTTON_PLUS, m_btn11);
+	m_btn12.SetStrText(L"-");
+	DDX_Control(pDX, IDC_BUTTON_MINUS, m_btn12);
+	m_btn13.SetStrText(L"*");
+	DDX_Control(pDX, IDC_BUTTON_MULTIPLY, m_btn13);
+	m_btn14.SetStrText(L"/");
+	DDX_Control(pDX, IDC_BUTTON_DIVIDE, m_btn14);
+	m_btn15.SetStrText(L"(");
+	DDX_Control(pDX, IDC_BUTTON_LEFT_BRACKET, m_btn15);
+	m_btn16.SetStrText(L")");
+	DDX_Control(pDX, IDC_BUTTON_RIGHT_BRACKET, m_btn16);
+	m_btn17.SetStrText(L".");
+	m_btn17.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON_DOT, m_btn17);
+	m_btn18.SetStrText(L"<-");
+	DDX_Control(pDX, IDC_BUTTON_BACKSPACE, m_btn18);
+	m_btn19.SetStrText(L"=");
+	m_btn19.SetColorBackground(255, 138, 186, 224);
+	DDX_Control(pDX, IDC_BUTTON_EQUAL, m_btn19);
+	m_btn20.SetStrText(L"CE");
+	DDX_Control(pDX, IDC_BUTTON_CE, m_btn20);
+	m_btn21.SetStrText(L"+/-");
+	m_btn21.SetColorBackground(255, 255, 255, 255);
+	DDX_Control(pDX, IDC_BUTTON13, m_btn21);
+	m_btn22.SetStrText(L"1/x");
+	DDX_Control(pDX, IDC_BUTTON15, m_btn22);
+	m_btn23.SetStrText(L"%");
+	DDX_Control(pDX, IDC_BUTTON12, m_btn23);
+	DDX_Control(pDX, IDC_EDIT_RESULT, m_edit);
 }
+	
 
 BEGIN_MESSAGE_MAP(CCalculatorDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
@@ -73,6 +135,7 @@ BEGIN_MESSAGE_MAP(CCalculatorDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_RIGHT_BRACKET, &CCalculatorDlg::OnBnClickedButtonRightBracket)
 	ON_BN_CLICKED(IDC_BUTTON_EQUAL, &CCalculatorDlg::OnBnClickedButtonEqual)
 	ON_BN_CLICKED(IDC_BUTTON_BACKSPACE, &CCalculatorDlg::OnBnClickedButtonBackspace)
+	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 
@@ -81,33 +144,41 @@ END_MESSAGE_MAP()
 BOOL CCalculatorDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-	// 폰트 설정
-	/*static CFont font;
-	LOGFONT LogFont;
-	GetDlgItem(IDC_EDIT_RESULT)->GetFont()->GetLogFont(&LogFont);
-	LogFont.lfHeight = 20;
 
-	font.CreateFontIndirect(&LogFont);
-	GetDlgItem(IDC_EDIT_RESULT)->SetFont(&font);*/
+	
+	// 시스템 메뉴에 "정보..." 메뉴 항목을 추가합니다.
 	CRect r;
+	CFont g_editFont;
 
-	((CEdit*)GetDlgItem(IDC_EDIT_RESULT))->GetRect(r);
+	g_editFont.CreateFont(20, // nHeight
+		10, // nWidth
+		0, // nEscapement
+		0, // nOrientation
+		900, // nWeight
+		0, // bItalic
+		0, // bUnderline 
+		0, // cStrikeOut 
+		0, // nCharSet
+		OUT_DEFAULT_PRECIS, // nOutPrecision 
+		0,                              // nClipPrecision 
+		DEFAULT_QUALITY,       // nQuality
+		DEFAULT_PITCH | FF_DONTCARE,  // nPitchAndFamily 
+		TEXT("굴림"));
 
-	// 상/하는 6만큼씩 여백을 부여합니다.
-	r.top += 50;
-	r.bottom -= 50;
+	GetDlgItem(IDC_EDIT_RESULT)->SetFont(&g_editFont);
+
+	// 먼저 여백을 부여하고자 하는 에디트 컨트롤의 기본 여백정보를 읽어옵니다.
+	m_edit.GetRect(r);
+
+	r.top += 19;
+	r.bottom -= 19;
 
 	// 변경된 정보를 해당 에디트 컨트롤에 적용합니다.
-	((CEdit*)GetDlgItem(IDC_EDIT_RESULT))->SetRect(r);
-	
-
-
-	// 시스템 메뉴에 "정보..." 메뉴 항목을 추가합니다.
-
+	m_edit.SetRect(r);
 	// IDM_ABOUTBOX는 시스템 명령 범위에 있어야 합니다.
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
-
+	
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
 	if (pSysMenu != nullptr)
 	{
@@ -626,4 +697,32 @@ BOOL CCalculatorDlg::PreTranslateMessage(MSG* pMsg)
 		}
 	}
 	return CDialog::PreTranslateMessage(pMsg);
+}
+
+
+HBRUSH CCalculatorDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	// TODO:  Change any attributes of the DC here
+	switch (nCtlColor) {
+	case CTLCOLOR_DLG:   /// 다이얼로그 배경색을 white로.
+	{
+		return (HBRUSH)GetStockObject(GRAY_BRUSH);
+		break;
+	}
+	//case CTLCOLOR_BTN:    // 버튼의 배경색을 투명으로...
+	//{
+	//	pDC->SetBkMode(TRANSPARENT);
+	//	return (HBRUSH)::GetStockObject(NULL_BRUSH);
+	//}
+	case CTLCOLOR_STATIC:
+	{
+		pDC->SetTextColor(RGB(0, 255, 255));  // static text 글자색 변경
+		pDC->SetBkMode(TRANSPARENT);   // static text 배경색 투명
+		return (HBRUSH)::GetStockObject(NULL_BRUSH);
+	}
+	}
+	// TODO:  Return a different brush if the default is not desired
+	return hbr;
 }
