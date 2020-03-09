@@ -7,7 +7,7 @@
 #include "Calculator.h"
 #include "CalculatorDlg.h"
 #include "afxdialogex.h"
-#include <stack>
+#include <stack> 
 #include <queue>
 
 #ifdef _DEBUG
@@ -106,7 +106,7 @@ void CCalculatorDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_RIGHT_BRACKET, m_btn16);
 	m_btn17.SetStrText(L".");
 	DDX_Control(pDX, IDC_BUTTON_DOT, m_btn17);
-	m_btn18.SetStrText(L"<-");
+	m_btn18.SetStrText(L"←");
 	DDX_Control(pDX, IDC_BUTTON_BACKSPACE, m_btn18);
 	m_btn19.SetStrText(L"=");
 	DDX_Control(pDX, IDC_BUTTON_EQUAL, m_btn19);
@@ -264,7 +264,7 @@ BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 		{
 			SetDlgItemText(IDC_EDIT_RESULT, num_str);
 			m_bIsNewNum = false;
-		}		
+		}
 		else if (m_bIsNewNum && m_strLastChar() == '0')
 		{
 			str.Delete(str.GetLength() - 1, 1);
@@ -272,7 +272,7 @@ BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 			if (num_str != '0')
 				m_bIsNewNum = false;
 		}
-		else
+		else if (m_strLastChar() != ')')
 		{
 			SetDlgItemText(IDC_EDIT_RESULT, str + num_str);
 			if (m_bIsNewNum && num_str == '0')
@@ -393,7 +393,7 @@ void CCalculatorDlg::OnBnClickedButtonRightBracket()
 	if (m_bCheckBracket() && ( m_bLastIsNum || m_strLastChar() == ")"))
 	{
 		SetDlgItemText(IDC_EDIT_RESULT, str + ")");
-		 m_bLastIsNum = false;
+		m_bLastIsNum = false;
 	}
 	else
 		m_nCntRightBracket--;
