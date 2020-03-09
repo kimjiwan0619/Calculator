@@ -105,17 +105,14 @@ void CCalculatorDlg::DoDataExchange(CDataExchange* pDX)
 	m_btn16.SetStrText(L")");
 	DDX_Control(pDX, IDC_BUTTON_RIGHT_BRACKET, m_btn16);
 	m_btn17.SetStrText(L".");
-	m_btn17.SetColorBackground(255, 255, 255, 255);
 	DDX_Control(pDX, IDC_BUTTON_DOT, m_btn17);
 	m_btn18.SetStrText(L"<-");
 	DDX_Control(pDX, IDC_BUTTON_BACKSPACE, m_btn18);
 	m_btn19.SetStrText(L"=");
-	m_btn19.SetColorBackground(255, 138, 186, 224);
 	DDX_Control(pDX, IDC_BUTTON_EQUAL, m_btn19);
 	m_btn20.SetStrText(L"CE");
 	DDX_Control(pDX, IDC_BUTTON_CE, m_btn20);
 	m_btn21.SetStrText(L"+/-");
-	m_btn21.SetColorBackground(255, 255, 255, 255);
 	DDX_Control(pDX, IDC_BUTTON13, m_btn21);
 	m_btn22.SetStrText(L"1/x");
 	DDX_Control(pDX, IDC_BUTTON15, m_btn22);

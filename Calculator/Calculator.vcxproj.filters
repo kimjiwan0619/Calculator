@@ -64,12 +64,10 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="ClassDiagram3.cd" />
+    <None Include="ClassDiagram4.cd" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Calculator.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="..\..\1.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

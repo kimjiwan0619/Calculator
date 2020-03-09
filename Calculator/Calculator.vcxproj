@@ -210,10 +210,10 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="ClassDiagram3.cd" />
+    <None Include="ClassDiagram4.cd" />
     <None Include="res\Calculator.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\1.bmp" />
     <Image Include="res\Calculator.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
