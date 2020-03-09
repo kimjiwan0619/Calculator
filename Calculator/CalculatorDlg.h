@@ -44,6 +44,7 @@ public:
 	CString m_strLastChar(); // 마지막 문자
 	bool m_bCheckBracket(); // '('괄호개수가 ')'개수보다 많거나 같은지
 	bool m_bIsOverDot = false; // 소수점 전후 구분
+	bool m_bIsOverDot2;// backspace를 위해 기억
 	bool m_bCalcIsOver = false; // 연산식이 끝났는지
 	bool m_bLastIsNum = false; // 마지막 문자가 숫자인지
 	bool m_bLastIsOp = false; // 마지막 문자가 operator인지
@@ -78,4 +79,5 @@ public:
 	CSkinButton m_btn23;
 	CEdit m_edit;
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };

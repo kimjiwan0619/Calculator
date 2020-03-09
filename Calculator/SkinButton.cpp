@@ -7,6 +7,7 @@ CSkinButton::CSkinButton()
 	m_clrBorder = Gdiplus::Color(255, 128, 128, 128);
 	m_clrText = Gdiplus::Color(255, 0, 0, 0);
 	m_fSizeText = 15;
+	m_clrOriginalBackground = m_clrBackground;
 }
 
 
@@ -77,6 +78,9 @@ void CSkinButton::DrawText(Graphics* pG)
 }
 BEGIN_MESSAGE_MAP(CSkinButton, CButton)
 	ON_WM_PAINT()
+	ON_WM_MOUSEHOVER()
+	ON_WM_MOUSEMOVE()
+	ON_WM_MOUSELEAVE()
 END_MESSAGE_MAP()
 
 
@@ -101,4 +105,43 @@ void CSkinButton::OnPaint()
 	DrawText(&memG);
 
 	mainG.DrawImage(&bmp, 0, 0);
+}
+
+void CSkinButton::OnMouseMove(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	RECT rt;
+	GetWindowRect(&rt);
+	
+	CPoint ptInRect = point;
+	ptInRect.x = rt.left + point.x;
+	ptInRect.y = rt.top + point.y; 
+	//TRACE(_T("%d-%d-%d-%d, %d:%d, %d\r\n"), rt.top, rt.left, rt.bottom, rt.right, rt.top, ptInRect.y, point.y);
+	if (PtInRect(&rt, ptInRect) == TRUE)
+	{
+		if (m_strText == L'+' || m_strText == L'-' || m_strText == L'*' || m_strText == L'/' || m_strText == L'=')
+			SetColorBackground(255, 0, 119, 200);
+		else
+			SetColorBackground(255, 214, 214, 214);
+	}
+	CButton::OnMouseMove(nFlags, point);
+}
+
+
+void CSkinButton::OnMouseLeave()
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	POINT mousePos;
+	GetCursorPos(&mousePos);
+
+	CRect clientRect;
+
+	GetClientRect(&clientRect);
+
+	if (mousePos.x >= clientRect.right)
+	{
+		m_clrBackground = m_clrOriginalBackground;
+	}
+	CButton::OnMouseLeave();
 }

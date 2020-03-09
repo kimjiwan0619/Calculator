@@ -133,6 +133,7 @@ BEGIN_MESSAGE_MAP(CCalculatorDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_EQUAL, &CCalculatorDlg::OnBnClickedButtonEqual)
 	ON_BN_CLICKED(IDC_BUTTON_BACKSPACE, &CCalculatorDlg::OnBnClickedButtonBackspace)
 	ON_WM_CTLCOLOR()
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -256,6 +257,7 @@ BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 	GetDlgItemText(IDC_EDIT_RESULT, str);
 	if (IDC_BUTTON0 <= wParam && wParam <= IDC_BUTTON9 )
 	{
+		m_bIsOverDot2 = m_bIsOverDot;
 		if (m_bCalcIsOver)
 			OnBnClickedButtonC();
 		GetDlgItemText(IDC_EDIT_RESULT, str);
@@ -264,6 +266,10 @@ BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 		{
 			SetDlgItemText(IDC_EDIT_RESULT, num_str);
 			m_bIsNewNum = false;
+			if (!m_bIsOverDot)
+				m_bDotEnable = true;
+			m_bLastIsOp = false;
+			m_bLastIsNum = true;
 		}
 		else if (m_bIsNewNum && m_strLastChar() == '0')
 		{
@@ -271,6 +277,10 @@ BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 			SetDlgItemText(IDC_EDIT_RESULT, str + num_str);
 			if (num_str != '0')
 				m_bIsNewNum = false;
+			if (!m_bIsOverDot)
+				m_bDotEnable = true;
+			m_bLastIsOp = false;
+			m_bLastIsNum = true;
 		}
 		else if (m_strLastChar() != ')')
 		{
@@ -279,15 +289,15 @@ BOOL CCalculatorDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 				m_bIsNewNum = true;
 			else
 				m_bIsNewNum = false;
+			if (!m_bIsOverDot)
+				m_bDotEnable = true;
+			m_bLastIsOp = false;
+			m_bLastIsNum = true;
 		}
-			
-		if (!m_bIsOverDot)
-			m_bDotEnable = true;
-		m_bLastIsOp = false;
-		m_bLastIsNum = true;
 	}
 	else if (IDC_BUTTON_PLUS <= wParam && wParam <= IDC_BUTTON_DIVIDE)
 	{
+		m_bIsOverDot2 = m_bIsOverDot;
 		GetDlgItemText(wParam, op_str);
 		if (wParam == IDC_BUTTON_MINUS && str == "")
 		{
@@ -566,6 +576,10 @@ void CCalculatorDlg::OnBnClickedButtonBackspace()
 		{
 			m_nCntLeftBracket--;
 		}
+		else if (lastOp == 1 || lastOp == 2)
+		{
+			m_bIsNewNum = false;
+		}
 		else if (lastOp == -1)
 		{
 			m_nCntRightBracket--;
@@ -577,6 +591,9 @@ void CCalculatorDlg::OnBnClickedButtonBackspace()
 		{
 			m_bLastIsNum = true;
 			m_bLastIsOp = false;
+			m_bIsOverDot = m_bIsOverDot2;
+			if (!m_bIsOverDot)
+				m_bDotEnable = true;
 		}
 		else if (lastOp == 1 || lastOp == 2)
 		{
@@ -684,12 +701,18 @@ BOOL CCalculatorDlg::PreTranslateMessage(MSG* pMsg)
 	{
 		if (pMsg->wParam == VK_RETURN)
 		{
+			
 			OnBnClickedButtonEqual();
 			return TRUE;
 		}
 		else if(pMsg->wParam == VK_BACK)
 		{
 			OnBnClickedButtonBackspace();
+			return TRUE;
+		}
+		else if (pMsg->wParam == VK_ESCAPE)
+		{
+			OnBnClickedButtonC();
 			return TRUE;
 		}
 	}
@@ -722,4 +745,22 @@ HBRUSH CCalculatorDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	}
 	// TODO:  Return a different brush if the default is not desired
 	return hbr;
+}
+
+
+void CCalculatorDlg::OnSize(UINT nType, int cx, int cy)
+{
+	/*CDialog::OnSize(nType, cx, cy);
+
+	CWnd* pCtl = GetDlgItem(idc_edi);
+
+	if (!pCtl) { return; }
+
+	CRect rectCtl;
+	pCtl->GetWindowRect(&rectCtl);
+	ScreenToClient(&rectCtl);
+
+	pCtl->MoveWindow(rectCtl.left, rectCtl.top, cx - 2 * rectCtl.left, cy - rectCtl.top - rectCtl.left, TRUE);
+
+	return;*/
 }

@@ -18,6 +18,7 @@ public:
 	void SetStrText(CString str);
 private:
 	Gdiplus::Color m_clrBackground;
+	Gdiplus::Color m_clrOriginalBackground;
 	Gdiplus::Color m_clrBorder;
 	Gdiplus::Color m_clrText;
 	float m_fSizeText;
@@ -28,4 +29,6 @@ private:
 public:
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnPaint();
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnMouseLeave();
 };
