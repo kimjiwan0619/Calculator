@@ -10,12 +10,17 @@ CSkinButton::CSkinButton()
 	m_clrOriginalBackground = m_clrBackground;
 }
 
-
 CSkinButton::~CSkinButton()
 {
 }
 
 void CSkinButton::SetColorBackground(int a, int r, int g, int b)
+{
+	m_clrBackground = Gdiplus::Color(a, r, g, b);
+	m_clrOriginalBackground = m_clrBackground;
+}
+
+void CSkinButton::ChangeColorBackground(int a, int r, int g, int b)
 {
 	m_clrBackground = Gdiplus::Color(a, r, g, b);
 }
@@ -120,9 +125,9 @@ void CSkinButton::OnMouseMove(UINT nFlags, CPoint point)
 	if (PtInRect(&rt, ptInRect) == TRUE)
 	{
 		if (m_strText == L'+' || m_strText == L'-' || m_strText == L'*' || m_strText == L'/' || m_strText == L'=')
-			SetColorBackground(255, 0, 119, 200);
+			ChangeColorBackground(255, 0, 119, 200);
 		else
-			SetColorBackground(255, 214, 214, 214);
+			ChangeColorBackground(255, 214, 214, 214);
 	}
 	CButton::OnMouseMove(nFlags, point);
 }

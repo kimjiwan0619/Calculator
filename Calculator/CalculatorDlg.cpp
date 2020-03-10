@@ -90,28 +90,28 @@ void CCalculatorDlg::DoDataExchange(CDataExchange* pDX)
 	m_btn9.SetStrText(L"9");
 	m_btn9.SetColorBackground(255, 255, 255, 255);
 	DDX_Control(pDX, IDC_BUTTON9, m_btn9);
-	m_btn10.SetStrText(L"C");
-	DDX_Control(pDX, IDC_BUTTON_C, m_btn10);
-	m_btn11.SetStrText(L"+");
-	DDX_Control(pDX, IDC_BUTTON_PLUS, m_btn11);
-	m_btn12.SetStrText(L"-");
-	DDX_Control(pDX, IDC_BUTTON_MINUS, m_btn12);
-	m_btn13.SetStrText(L"*");
-	DDX_Control(pDX, IDC_BUTTON_MULTIPLY, m_btn13);
-	m_btn14.SetStrText(L"/");
-	DDX_Control(pDX, IDC_BUTTON_DIVIDE, m_btn14);
-	m_btn15.SetStrText(L"(");
-	DDX_Control(pDX, IDC_BUTTON_LEFT_BRACKET, m_btn15);
-	m_btn16.SetStrText(L")");
-	DDX_Control(pDX, IDC_BUTTON_RIGHT_BRACKET, m_btn16);
-	m_btn17.SetStrText(L".");
-	DDX_Control(pDX, IDC_BUTTON_DOT, m_btn17);
-	m_btn18.SetStrText(L"←");
-	DDX_Control(pDX, IDC_BUTTON_BACKSPACE, m_btn18);
-	m_btn19.SetStrText(L"=");
-	DDX_Control(pDX, IDC_BUTTON_EQUAL, m_btn19);
-	m_btn20.SetStrText(L"CE");
-	DDX_Control(pDX, IDC_BUTTON_CE, m_btn20);
+	m_btnC.SetStrText(L"C");
+	DDX_Control(pDX, IDC_BUTTON_C, m_btnC);
+	m_btnPlus.SetStrText(L"+");
+	DDX_Control(pDX, IDC_BUTTON_PLUS, m_btnPlus);
+	m_btnMinus.SetStrText(L"-");
+	DDX_Control(pDX, IDC_BUTTON_MINUS, m_btnMinus);
+	m_btnMul.SetStrText(L"*");
+	DDX_Control(pDX, IDC_BUTTON_MULTIPLY, m_btnMul);
+	m_btnDivide.SetStrText(L"/");
+	DDX_Control(pDX, IDC_BUTTON_DIVIDE, m_btnDivide);
+	m_btnLBracket.SetStrText(L"(");
+	DDX_Control(pDX, IDC_BUTTON_LEFT_BRACKET, m_btnLBracket);
+	m_btnRBracket.SetStrText(L")");
+	DDX_Control(pDX, IDC_BUTTON_RIGHT_BRACKET, m_btnRBracket);
+	m_btnDot.SetStrText(L".");
+	DDX_Control(pDX, IDC_BUTTON_DOT, m_btnDot);
+	m_btnBackSpace.SetStrText(L"←");
+	DDX_Control(pDX, IDC_BUTTON_BACKSPACE, m_btnBackSpace);
+	m_btnEqual.SetStrText(L"=");
+	DDX_Control(pDX, IDC_BUTTON_EQUAL, m_btnEqual);
+	m_btnCE.SetStrText(L"CE");
+	DDX_Control(pDX, IDC_BUTTON_CE, m_btnCE);
 	m_btn21.SetStrText(L"+/-");
 	DDX_Control(pDX, IDC_BUTTON13, m_btn21);
 	m_btn22.SetStrText(L"1/x");
@@ -134,6 +134,7 @@ BEGIN_MESSAGE_MAP(CCalculatorDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_BACKSPACE, &CCalculatorDlg::OnBnClickedButtonBackspace)
 	ON_WM_CTLCOLOR()
 	ON_WM_SIZE()
+	ON_WM_KEYUP()
 END_MESSAGE_MAP()
 
 
@@ -646,76 +647,214 @@ BOOL CCalculatorDlg::PreTranslateMessage(MSG* pMsg)
 	if (pMsg->message == WM_CHAR)
 	{
 		switch ((TCHAR)pMsg->wParam)
-		{
-			
+		{	
 		case _T('1'):
+		{
+			m_btn1.ChangeColorBackground(255, 214, 214, 214);
+			m_btn1.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('2'):
+		{
+			m_btn2.ChangeColorBackground(255, 214, 214, 214);
+			m_btn2.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('3'):
+		{
+			m_btn3.ChangeColorBackground(255, 214, 214, 214);
+			m_btn3.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('4'):
+		{
+			m_btn4.ChangeColorBackground(255, 214, 214, 214);
+			m_btn4.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('5'):
+		{
+			m_btn5.ChangeColorBackground(255, 214, 214, 214);
+			m_btn5.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('6'):
+		{
+			m_btn6.ChangeColorBackground(255, 214, 214, 214);
+			m_btn6.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('7'):
+		{
+			m_btn7.ChangeColorBackground(255, 214, 214, 214);
+			m_btn7.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('8'):
+		{
+			m_btn8.ChangeColorBackground(255, 214, 214, 214);
+			m_btn8.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('9'):
+		{
+			m_btn9.ChangeColorBackground(255, 214, 214, 214);
+			m_btn9.Invalidate();
+			int nInputNum = pMsg->wParam - '0';
+			int nSendIDC = nInputNum + IDC_BUTTON0;
+			OnCommand(nSendIDC, 0);
+			break;
+		}
 		case _T('0'):
 		{
+			m_btn0.ChangeColorBackground(255, 214, 214, 214);
+			m_btn0.Invalidate();
 			int nInputNum = pMsg->wParam - '0';
-
 			int nSendIDC = nInputNum + IDC_BUTTON0;
-
 			OnCommand(nSendIDC, 0);
+			break;
 		}
-		break;
+		
 		case _T('.'):
+			m_btnDot.ChangeColorBackground(255, 214, 214, 214);
+			m_btnDot.Invalidate();
 			OnBnClickedButtonDot();
 			break;
 		case _T('+'):
+			m_btnPlus.ChangeColorBackground(255, 0, 119, 200);
+			m_btnPlus.Invalidate();
 			OnCommand(IDC_BUTTON_PLUS, 0);
 			break;
 		case _T('-'):
+			m_btnMinus.ChangeColorBackground(255, 0, 119, 200);
+			m_btnMinus.Invalidate();
 			OnCommand(IDC_BUTTON_MINUS, 0);
 			break;
 		case _T('/'):
+			m_btnDivide.ChangeColorBackground(255, 0, 119, 200);
+			m_btnDivide.Invalidate();
 			OnCommand(IDC_BUTTON_DIVIDE, 0);
 			break;
 		case _T('*'):
+			m_btnMul.ChangeColorBackground(255, 0, 119, 200);
+			m_btnMul.Invalidate();
 			OnCommand(IDC_BUTTON_MULTIPLY, 0);
 			break;
 		case _T('='):
+			m_btnEqual.ChangeColorBackground(255, 0, 119, 200);
+			m_btnEqual.Invalidate();
 			OnBnClickedButtonEqual();
 			break;
 		case _T('c'):
 		case _T('C'):
+			m_btnC.ChangeColorBackground(255, 214, 214, 214);
+			m_btnC.Invalidate();
 			OnBnClickedButtonC();
 			break;
 		case _T('('):
+			m_btnLBracket.ChangeColorBackground(255, 214, 214, 214);
+			m_btnLBracket.Invalidate();
 			OnBnClickedButtonLeftBracket();
 			break;
 		case _T(')'):
+			m_btnRBracket.ChangeColorBackground(255, 214, 214, 214);
+			m_btnRBracket.Invalidate();
 			OnBnClickedButtonRightBracket();
 		}
 		return TRUE;
 	}
-
 	if (pMsg->message == WM_KEYDOWN)
 	{
 		if (pMsg->wParam == VK_RETURN)
 		{
-			
+			m_btnEqual.ChangeColorBackground(255, 0, 119, 200);
+			m_btnEqual.Invalidate();
 			OnBnClickedButtonEqual();
 			return TRUE;
 		}
 		else if(pMsg->wParam == VK_BACK)
 		{
+			m_btnBackSpace.ChangeColorBackground(255, 214, 214, 214);
+			m_btnBackSpace.Invalidate();
 			OnBnClickedButtonBackspace();
 			return TRUE;
 		}
 		else if (pMsg->wParam == VK_ESCAPE)
 		{
+			m_btnC.ChangeColorBackground(255, 214, 214, 214);
+			m_btnC.Invalidate();
 			OnBnClickedButtonC();
 			return TRUE;
 		}
 	}
+	else if (pMsg->message == WM_KEYUP)
+	{
+		m_btn0.ChangeColorBackground(255, 255, 255, 255);
+		m_btn1.ChangeColorBackground(255, 255, 255, 255);
+		m_btn2.ChangeColorBackground(255, 255, 255, 255);
+		m_btn3.ChangeColorBackground(255, 255, 255, 255);
+		m_btn4.ChangeColorBackground(255, 255, 255, 255);
+		m_btn5.ChangeColorBackground(255, 255, 255, 255);
+		m_btn6.ChangeColorBackground(255, 255, 255, 255);
+		m_btn7.ChangeColorBackground(255, 255, 255, 255);
+		m_btn8.ChangeColorBackground(255, 255, 255, 255);
+		m_btn9.ChangeColorBackground(255, 255, 255, 255);
+		m_btnC.ChangeColorBackground(255, 240, 240, 240);
+		m_btnPlus.ChangeColorBackground(255, 240, 240, 240);
+		m_btnMinus.ChangeColorBackground(255, 240, 240, 240);
+		m_btnMul.ChangeColorBackground(255, 240, 240, 240);
+		m_btnDivide.ChangeColorBackground(255, 240, 240, 240);
+		m_btnLBracket.ChangeColorBackground(255, 240, 240, 240);
+		m_btnRBracket.ChangeColorBackground(255, 240, 240, 240);
+		m_btnDot.ChangeColorBackground(255, 240, 240, 240);
+		m_btnBackSpace.ChangeColorBackground(255, 240, 240, 240);
+		m_btnEqual.ChangeColorBackground(255, 240, 240, 240);
+		m_btn0.Invalidate();
+		m_btn1.Invalidate();
+		m_btn2.Invalidate();
+		m_btn3.Invalidate();
+		m_btn4.Invalidate();
+		m_btn5.Invalidate();
+		m_btn6.Invalidate();
+		m_btn7.Invalidate();
+		m_btn8.Invalidate();
+		m_btn9.Invalidate();
+		m_btnC.Invalidate();
+		m_btnPlus.Invalidate();
+		m_btnMinus.Invalidate();
+		m_btnMul.Invalidate();
+		m_btnDivide.Invalidate();
+		m_btnLBracket.Invalidate();
+		m_btnRBracket.Invalidate();
+		m_btnDot.Invalidate();
+		m_btnBackSpace.Invalidate();
+		m_btnEqual.Invalidate();
+	}
+	
 	return CDialog::PreTranslateMessage(pMsg);
 }
 
@@ -745,22 +884,4 @@ HBRUSH CCalculatorDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	}
 	// TODO:  Return a different brush if the default is not desired
 	return hbr;
-}
-
-
-void CCalculatorDlg::OnSize(UINT nType, int cx, int cy)
-{
-	/*CDialog::OnSize(nType, cx, cy);
-
-	CWnd* pCtl = GetDlgItem(idc_edi);
-
-	if (!pCtl) { return; }
-
-	CRect rectCtl;
-	pCtl->GetWindowRect(&rectCtl);
-	ScreenToClient(&rectCtl);
-
-	pCtl->MoveWindow(rectCtl.left, rectCtl.top, cx - 2 * rectCtl.left, cy - rectCtl.top - rectCtl.left, TRUE);
-
-	return;*/
 }

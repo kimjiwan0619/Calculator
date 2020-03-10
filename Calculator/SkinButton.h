@@ -12,6 +12,7 @@ public:
 
 public:
 	void SetColorBackground(int a, int r, int g, int b);
+	void ChangeColorBackground(int, int, int, int);
 	void SetColorBorder(int a, int r, int g, int b);
 	void SetColorText(int a, int r, int g, int b);
 	void SetSizeText(float size);
